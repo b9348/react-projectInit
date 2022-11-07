@@ -5,29 +5,17 @@ import './asd.less';
 
 const Asd = () => {
     useEffect(() => {
-        (async function f() {
-            // 开启loading特效
-            const instance = axios.create({
-                baseURL: '/api/rand.qinghua',
-                timeout: 3000,
-                headers: { 'Content-Type': 'application/json' }
-            });
-
-            return new Promise((resolve, reject) => {
-                // console.log('开始调用')
-                instance.get('')
-                    .then((response) => {
-                        console.log(response)
-                        resolve(response);
-
-                    })
-                    // .catch((e) => {
-                    //     reject(e)
-                    //     console.log(e)
-                    // })
+        const getStudentData = () => {
+            axios.post('/auth/login',{
+                username:'demo',
+                password:'demo001'
+            }).then(res => {
+                console.log('成功', res)
+            }, err => {
+                console.log('失败', err)
             })
-
-        })()
+        }
+        getStudentData()
     }, [])
     return <div className="wrapper">
         <div className="log">

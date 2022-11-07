@@ -1,15 +1,33 @@
 import { Input, Button } from 'antd';
 import React, { useEffect } from 'react';
-import { postF } from './utils/api'
+import axios from 'axios';
 import './asd.less';
 
 const Asd = () => {
     useEffect(() => {
-        const query = async () => {
-            const res = await postF()
-            console.log(res);
-        }
-        query()
+        (async function f() {
+            // 开启loading特效
+            const instance = axios.create({
+                baseURL: '/api/rand.qinghua',
+                timeout: 3000,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            return new Promise((resolve, reject) => {
+                // console.log('开始调用')
+                instance.get('')
+                    .then((response) => {
+                        console.log(response)
+                        resolve(response);
+
+                    })
+                    // .catch((e) => {
+                    //     reject(e)
+                    //     console.log(e)
+                    // })
+            })
+
+        })()
     }, [])
     return <div className="wrapper">
         <div className="log">

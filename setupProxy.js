@@ -1,20 +1,12 @@
-const {createProxyMiddleware } = require('http-proxy-middleware')
- 
-module.exports = function(app) {
- app.use(createProxyMiddleware('/api', { 
-     target: 'http://localhost:3000',
-     pathRewrite: {
-       '^/api': '',
-     },
-     changeOrigin: true,
-     secure: false
-   }));
-   app.use(createProxyMiddleware('/client', {
-       target: 'http://localhost:3000',
-       pathRewrite: {
-         '^/client': '',
-       },
-       changeOrigin: true,
-       secure: false
-   }));
+/** 只支持commonJs */
+
+const { createProxyMiddleware } = require('http-proxy-middleware')
+module.exports = function (app) {
+  app.use(
+    createProxyMiddleware('/api', {
+      target: 'https://api.uomg.com/', // 配置转发目标地址(能返回数据的服务器地址)
+      changeOrigin: true, // 控制服务器接收到的请求头中host字段的值
+      pathRewrite: { '^/api': '' }
+    })
+  )
 }
